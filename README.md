@@ -103,7 +103,7 @@ $$
 The total loss across all phase conductors is the sum of these individual losses:
 
 $$
-P_{total, phase}(t) = \sum_{k=1}^{N} \left[ i_{p,k} \sin(\omega t + \varphi_k) \right]^2 \cdot R_L
+P_{los, phases}(t) = \sum_{k=1}^{N} \left[ i_{p,k} \sin(\omega t + \varphi_k) \right]^2 \cdot R_L
 $$
 
 #### B. Neutral Conductor Loss
@@ -119,10 +119,10 @@ $$
 
 ### Total System Loss
 
-To quantify the thermal stress and energy efficiency of the system, we move from instantaneous values to time-averaged metrics. The standard for engineering reporting is **Average Power Loss**, which relies on the **Root Mean Square** current.
+To quantify the thermal stress and energy efficiency of the system, we move from instantaneous values to time-averaged metrics. The standard for engineering reporting is Average Power Loss, which relies on the Root Mean Square current.
 
 #### 1. RMS Current Calculation
-The RMS value represents the effective current—it is the equivalent DC current that would produce the same amount of heat in a resistor. For any periodic current $i(t)$ with period $T$:
+The RMS value represents the effective current and it is the equivalent DC current that would produce the same amount of heat in a resistor. For any periodic current $i(t)$ with period $T$:
 
 $$
 I_{rms} = \sqrt{\frac{1}{T} \int_{0}^{T} i(t)^2 dt}
@@ -138,20 +138,20 @@ $$
 The average power loss is the mean of the instantaneous power over one full cycle. For a resistive line $R$:
 
 $$
-P_{loss, avg} = \frac{1}{T} \int_{0}^{T} i(t)^2 \cdot R dt = R \cdot \left( \frac{1}{T} \int_{0}^{T} i(t)^2 dt \right)
+P_{loss} = \frac{1}{T} \int_{0}^{T} i(t)^2 \cdot R dt = R \cdot \left( \frac{1}{T} \int_{0}^{T} i(t)^2 dt \right)
 $$
 
 Therefore, the calculation simplifies to the standard formula:
 
 $$
-P_{loss, avg} = I_{rms}^2 \cdot R
+P_{loss} = I_{rms}^2 \cdot R
 $$
 
 #### 3. Total System Power Loss
 The project calculates the total average loss by summing the losses in all $N$ phases plus the loss in the neutral return path:
 
 $$
-P_{loss, avg, tot} = \sum_{k=1}^{N} \left( \frac{i_{p,k}}{\sqrt{2}} \right)^2 \cdot R_L + \left( \frac{i_{p,N}}{\sqrt{2}} \right)^2 \cdot R_N
+P_{loss, tot} = \sum_{k=1}^{N} (I_{rms, k}^2 \cdot R_L) + (I_{rms, N}^2 \cdot R_N)
 $$
 
 The term $P_{loss, N}$ represents the inefficiency of the system configuration. It is energy dissipated in the return path that performs no useful work for the load. Minimizing $i_N$ (by balancing amplitudes and phases) directly reduces this loss component to zero.
