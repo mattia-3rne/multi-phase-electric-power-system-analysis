@@ -56,7 +56,7 @@ $$
 Applying this identity to our power equation, where $A$ represents the voltage phase and $B$ represents the current phase, we obtain two distinct terms for each phase:
 
 $$
-p_k(t) = \frac{u_p i_p}{2} \left[ \underbrace{\cos(\phi)}_{\text{DC Component}} + \underbrace{\cos\left(2\omega t - \frac{4\pi k}{N} - \phi\right)}_{\text{Double-Frequency AC Component}} \right]
+p_k(t) = \frac{u_p i_p}{2} \left[ \cos(\phi) + \cos\left(2\omega t - \frac{4\pi k}{N} - \phi\right) \right]
 $$
 
 The **Total Instantaneous Power** $P_{total}(t)$ of the system is obtained by summing the contributions of all $N$ phases simultaneously:
@@ -68,7 +68,7 @@ $$
 This summation can be split into two separate parts:
 
 $$
-P_{total}(t) = \underbrace{\sum_{k=0}^{N-1} \frac{u_p i_p}{2} \cos(\phi)}_{\text{Constant Term}} + \underbrace{\sum_{k=0}^{N-1} \frac{u_p i_p}{2} \cos\left(2\omega t - \frac{4\pi k}{N} - \phi\right)}_{\text{Oscillating Term}}
+P_{total}(t) = \sum_{k=0}^{N-1} \frac{u_p i_p}{2} \cos(\phi) + \sum_{k=0}^{N-1} \frac{u_p i_p}{2} \cos\left(2\omega t - \frac{4\pi k}{N} - \phi\right)
 $$
 
 **The Analysis of the Sums:**
@@ -138,7 +138,7 @@ $$
 The average power loss is the mean of the instantaneous power over one full cycle. For a resistive line $R$:
 
 $$
-P_{avg} = \frac{1}{T} \int_{0}^{T} \underbrace{i(t)^2 \cdot R}_{\text{Instantaneous Power}} dt = R \cdot \underbrace{\left( \frac{1}{T} \int_{0}^{T} i(t)^2 dt \right)}_{I_{rms}^2}
+P_{avg} = \frac{1}{T} \int_{0}^{T} i(t)^2 \cdot R dt = R \cdot \left( \frac{1}{T} \int_{0}^{T} i(t)^2 dt \right)
 $$
 
 Therefore, the calculation simplifies to the standard formula: $P_{avg} = I_{rms}^2 \cdot R$.
@@ -147,7 +147,7 @@ Therefore, the calculation simplifies to the standard formula: $P_{avg} = I_{rms
 The project calculates the total average loss by summing the losses in all $N$ phases plus the loss in the neutral return path:
 
 $$
-P_{avg, total} = \underbrace{\sum_{k=1}^{N} \left( \frac{i_{p,k}}{\sqrt{2}} \right)^2 \cdot R_L}_{\text{Phase Losses}} + \underbrace{\left( \frac{i_{p,N}}{\sqrt{2}} \right)^2 \cdot R_N}_{\text{Neutral Loss}}
+P_{avg, total} = \sum_{k=1}^{N} \left( \frac{i_{p,k}}{\sqrt{2}} \right)^2 \cdot R_L + \left( \frac{i_{p,N}}{\sqrt{2}} \right)^2 \cdot R_N
 $$
 
 The term $P_{loss, N}$ represents the inefficiency of the system configuration. It is energy dissipated in the return path that performs no useful work for the load. Minimizing $i_N$ (by balancing amplitudes and phases) directly reduces this loss component to zero.
@@ -173,7 +173,7 @@ The term $P_{loss, N}$ represents the inefficiency of the system configuration. 
 
 1.  **Clone the repository**:
     ```bash
-    git clone [https://github.com/your-username/multi-phase-electric-power-system-analysis.git](https://github.com/your-username/multi-phase-electric-power-system-analysis.git)
+    git clone https://github.com/your-username/multi-phase-electric-power-system-analysis.git
     ```
 
 2.  **Install dependencies**:
