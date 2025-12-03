@@ -2,7 +2,7 @@
 
 ## ⚡ Project Overview
 
-The goal of this project is to analyze and simulate the behavior of **Multi-Phase Alternating Current Systems**. It specifically focuses on the calculation of neutral currents, resistive losses, and instantaneous power flows in systems with an arbitrary number of phases ($N$).
+The goal of this project is to analyze and simulate the behavior of **Multi-Phase Alternating Current Systems**. It specifically focuses on the calculation of neutral currents, resistive losses, and instantaneous power flows in systems with an arbitrary number of phases $N$.
 
 This project uses Vector algebra and Time-Domain simulation to demonstrate the mathematical efficiency of balanced polyphase systems and the consequences of load imbalances in a **Star Connection**.
 
