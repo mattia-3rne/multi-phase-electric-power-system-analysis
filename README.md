@@ -163,7 +163,7 @@ The term $P_{loss, N}$ represents the inefficiency of the system configuration. 
 | Limitation | Description |
 | :--- | :--- |
 | **Harmonics** | The derivation assumes pure sine waves. Non-linear loads (like LEDs) introduce harmonic frequencies that do not sum to zero in the neutral line, even in balanced systems. |
-| **Impedance Symmetry** | In reality, the power delivered is never truly constant because the underlying assumption of perfectly symmetric grid impedance is not met. Due to slight differences, such as variations in cable lengths or component tolerances, minor oscillations in the total power will always be present. |
+| **Impedance Symmetry** | The constant power calculation relies on perfect symmetry. In reality, asymmetry, from factors like cable lengths or component tolerances, means the total power is never truly constant, and minor oscillations are unavoidable. |
 
 ---
 
