@@ -2,7 +2,7 @@
 
 ## ⚡ Project Overview
 
-The goal of this project is to analyze and simulate the behavior of **Multi-Phase Alternating Current (AC) Systems**. It specifically focuses on the calculation of neutral currents, resistive losses, and instantaneous power flows in systems with an arbitrary number of phases ($N$).
+The goal of this project is to analyze and simulate the behavior of **Multi-Phase Alternating Current Systems**. It specifically focuses on the calculation of neutral currents, resistive losses, and instantaneous power flows in systems with an arbitrary number of phases ($N$).
 
 This project uses Vector algebra and Time-Domain simulation to demonstrate the mathematical efficiency of balanced polyphase systems and the consequences of load imbalances in a **Star Connection**.
 
@@ -10,9 +10,9 @@ This project uses Vector algebra and Time-Domain simulation to demonstrate the m
 
 ## 🧠 Theoretical Background
 
-### 1. The Star Connection
+### The Star Connection
 
-In a Star topology, $N$ distinct phases meet at a common central node called the **Star Point** (*Sternpunkt*). This creates a circuit where the return path for the current is provided by a shared **Neutral Conductor**.
+In a Star topology, $N$ distinct phases meet at a common central node called the **Star Point**. This creates a circuit where the return path for the current is provided by a shared **Neutral Conductor**.
 
 #### Kirchhoff's Current Law
 The fundamental calculation for this system is based on Kirchhoff's Current Law. For a system with $N$ phases, the instantaneous current flowing into the neutral line $i_N(t)$ is the algebraic sum of all individual phase currents:
@@ -27,17 +27,17 @@ $$
 i_k(t) = \hat{i}_k \cdot \sin(\omega t + \varphi_k)
 $$
 
-Then the neutral current is the superposition of these $N$ sine waves. In a **perfectly balanced system**, where all amplitudes $\hat{i}$ are equal and phases are shifted equidistantly by $2\pi/N$, this sum is exactly zero.
+Then the neutral current is the superposition of these $N$ sine waves. In a **perfectly balanced system**, where all amplitudes $\hat{i}$ are equal and phases are shifted equidistantly by $2\pi/N$, this sum is exactly zero:
 
 $$
-\text{Balanced Case:} \quad i_N(t) = 0 \quad \forall t
+i_N(t) = 0 \quad \forall t
 $$
 
 ---
 
-### 2. The Phenomenon of Constant Power Transfer
+### The Phenomenon of Constant Power Transfer
 
-A fundamental and unique property of symmetric polyphase systems is that the **total instantaneous power** delivered to a resistive or inductive load remains strictly constant over time. This stands in stark contrast to single-phase systems, where the power pulsates at double the grid frequency (dropping to zero twice per cycle), causing mechanical vibrations and torque ripple in motors.
+A fundamental and unique property of symmetric polyphase systems is that the **total instantaneous power** delivered to a resistive or inductive load remains strictly constant over time. This stands in stark contrast to single-phase systems, where the power pulsates at double the grid frequency, causing mechanical vibrations and torque ripple in motors.
 
 To prove this for a general system with $N$ phases (where $N \geq 3$), we assume a perfectly symmetric supply. Let the voltage $u(t)$ and current $i(t)$ for the $k$-th phase be shifted by an angle of $\frac{2\pi k}{N}$, with a load power factor angle of $\phi$.
 
@@ -74,7 +74,7 @@ $$
 **The Analysis of the Sums:**
 
 1.  **The Constant Term:** Since $\cos(\phi)$ does not depend on the index $k$, summing it $N$ times simply multiplies the value by $N$.
-2.  **The Oscillating Term:** This term represents the sum of $N$ sinusoidal waves (or phasors), each with the same amplitude and frequency ($2\omega$), but spaced equally apart by a phase angle of $\frac{4\pi}{N}$. In any symmetric system where $N \geq 3$, the sum of these vectors forms a closed polygon in the complex plane, meaning their vector sum is exactly **zero**.
+2.  **The Oscillating Term:** This term represents the sum of $N$ sinusoidal waves (or phasors), each with the same amplitude and frequency ($2\omega$), but spaced equally apart by a phase angle of $\frac{4\pi}{N}$. In any symmetric system where $N \geq 3$, the sum of these vectors forms a closed polygon in the complex plane, meaning their vector sum is exactly zero.
 
 Consequently, the oscillating term vanishes completely, leaving only the constant term:
 
@@ -87,7 +87,7 @@ This mathematical result explains why large-scale industrial motors and generato
 
 ---
 
-### 3. Resistive Line Losses
+### Resistive Line Losses
 
 In real-world applications, conductors are not ideal superconductors; they possess internal electrical resistance ($R$). As current flows through these conductors, a portion of the electrical energy is irreversibly converted into heat via Joule Heating. This project calculates these **Conduction Losses** to quantify system efficiency.
 
@@ -115,15 +115,42 @@ $$
 P_{loss, N}(t) = i_N(t)^2 \cdot R_N = \left( \sum_{k=1}^{N} \hat{i}_k \sin(\omega t + \varphi_k) \right)^2 \cdot R_N
 $$
 
-#### Total System Loss & RMS Calculation
-The project sums these components to find the total instantaneous energy waste. For engineering reporting, we often use the **Average Power Loss**, calculated using the Root Mean Square (RMS) currents:
+---
+
+### Total System Loss
+
+To quantify the thermal stress and energy efficiency of the system, we move from instantaneous values to time-averaged metrics. The standard for engineering reporting is **Average Power Loss**, which relies on the **Root Mean Square** current.
+
+#### 1. RMS Current Calculation
+The RMS value represents the effective current—it is the equivalent DC current that would produce the same amount of heat in a resistor. For any periodic current $i(t)$ with period $T$:
 
 $$
-P_{avg} = \underbrace{\sum_{k=1}^{N} (I_{rms, k}^2 \cdot R_L)}_{\text{Phase Losses}} + \underbrace{(I_{rms, N}^2 \cdot R_N)}_{\text{Neutral Loss}}
+I_{rms} = \sqrt{\frac{1}{T} \int_{0}^{T} i(t)^2 dt}
 $$
 
-* **Key Insight:** The term $P_{loss, N}$ represents the inefficiency of the system configuration. It is energy dissipated in the return path that performs no useful work for the load. Minimizing $i_N$ by balancing the system directly reduces this loss component.
+For the pure sinusoidal currents used in this simulation, this integration simplifies to a constant relationship with the peak amplitude $\hat{i}$:
 
+$$
+I_{rms} = \frac{\hat{i}}{\sqrt{2}} \approx 0.707 \cdot \hat{i}
+$$
+
+#### 2. Deriving Average Power Loss
+The average power loss is the mean of the instantaneous power over one full cycle. For a resistive line $R$:
+
+$$
+P_{avg} = \frac{1}{T} \int_{0}^{T} \underbrace{i(t)^2 \cdot R}_{\text{Instantaneous Power}} dt = R \cdot \underbrace{\left( \frac{1}{T} \int_{0}^{T} i(t)^2 dt \right)}_{I_{rms}^2}
+$$
+
+Therefore, the calculation simplifies to the standard formula: $P_{avg} = I_{rms}^2 \cdot R$.
+
+#### 3. Total System Power Loss
+The project calculates the total average loss by summing the losses in all $N$ phases plus the loss in the neutral return path:
+
+$$
+P_{avg, total} = \underbrace{\sum_{k=1}^{N} \left( \frac{\hat{i}_k}{\sqrt{2}} \right)^2 \cdot R_L}_{\text{Phase Losses}} + \underbrace{\left( \frac{\hat{i}_{N, peak}}{\sqrt{2}} \right)^2 \cdot R_N}_{\text{Neutral Loss}}
+$$
+
+The term $P_{loss, N}$ represents the inefficiency of the system configuration. It is energy dissipated in the return path that performs no useful work for the load. Minimizing $i_N$ (by balancing amplitudes and phases) directly reduces this loss component to zero.
 
 ---
 
@@ -131,9 +158,8 @@ $$
 
 | Limitation | Description |
 | :--- | :--- |
-| **Harmonics** | The derivation assumes pure sine waves. Non-linear loads (like LEDs or rectifiers) introduce harmonic frequencies (3rd, 5th, etc.) that do not sum to zero in the neutral line, even in balanced systems. |
+| **Harmonics** | The derivation assumes pure sine waves. Non-linear loads (like LEDs) introduce harmonic frequencies that do not sum to zero in the neutral line, even in balanced systems. |
 | **Impedance Symmetry** | The "Constant Power" proof assumes the grid impedance is perfectly symmetric. In reality, slight differences in cable lengths can introduce oscillations. |
-| **Steady State** | This analysis models steady-state operation. Transient spikes during switching events are not covered by these equations. |
 
 ---
 
@@ -159,3 +185,10 @@ $$
     ```bash
     jupyter notebook
     ```
+---
+
+## 📂 Project Structure
+
+* `requirements.txt`: Python package dependencies.
+* `main.ipynb`: The main analysis notebook.
+* `README.md`: Project documentation.
