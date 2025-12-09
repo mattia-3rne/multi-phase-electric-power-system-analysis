@@ -156,6 +156,18 @@ $$
 
 The term $P_{loss, N}$ represents the inefficiency of the system configuration. It is energy dissipated in the return path that performs no useful work for the load. Minimizing $i_N$ (by balancing amplitudes and phases) directly reduces this loss component to zero.
 
+#### 4. System Efficiency
+
+The system efficiency defines how much of the input energy is successfully delivered to the load versus how much is wasted as heat in the lines.
+* **$P_{load}$:** The useful active power consumed by the load.
+* **$P_{in}$:** The total input power supplied by the source.
+
+The efficiency is calculated as:
+
+$$
+\eta = \frac{P_{load}}{P_{in}} = \frac{P_{load}}{P_{load} + P_{loss, tot}}
+$$
+
 ---
 
 ## ⚠️ Limitations
