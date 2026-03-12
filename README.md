@@ -1,6 +1,6 @@
 # Multi-Phase Electric Power System Analysis
 
-## ⚡ Project Overview
+## Project Overview
 
 The goal of this project is to analyze and simulate the behavior of **Multi-Phase Alternating Current Systems**. It specifically focuses on the calculation of neutral currents, resistive losses, and instantaneous power flows in systems with an arbitrary number of phases $N$.
 
@@ -8,7 +8,7 @@ This project uses Vector algebra and Time-Domain simulation to demonstrate the m
 
 ---
 
-## 🧠 Theoretical Background
+## Theoretical Background
 
 ### The Star Connection
 
@@ -170,7 +170,7 @@ $$
 
 ---
 
-## ⚠️ Limitations
+## Limitations
 
 | Limitation | Description |
 | :--- | :--- |
@@ -179,7 +179,7 @@ $$
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 * Python 3.8+
@@ -203,7 +203,7 @@ $$
     ```
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 * `main.ipynb`: The main analysis notebook.
 * `requirements.txt`: Python package dependencies.
