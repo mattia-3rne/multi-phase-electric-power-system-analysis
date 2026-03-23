@@ -189,7 +189,7 @@ $$
 
 1.  **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/multi-phase-electric-power-system-analysis.git
+    git clone https://github.com/mattia-3rne/multi-phase-electric-power-system-analysis.git
     ```
 
 2.  **Install dependencies**:
